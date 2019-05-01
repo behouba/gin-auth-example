@@ -20,11 +20,11 @@ func main() {
 	r.POST("/login", login)
 	r.GET("/logout", logout)
 	private := r.Group("/private")
+	private.Use(AuthRequired())
 	{
 		private.GET("/", private1)
 		private.GET("/two", private2)
 	}
-	private.Use(AuthRequired())
 	r.Run(":8080")
 }
 
